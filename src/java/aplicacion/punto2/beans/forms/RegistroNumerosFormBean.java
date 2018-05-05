@@ -17,42 +17,46 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class RegistroNumerosFormBean {
- private double numero;
+
+    private double numero;
     private double menor;
     private double mayor;
     private double promedio;
-    private List<Double>ingresos;
+    private List<Double> ingresos;
+
     public RegistroNumerosFormBean() {
         ingresos = new ArrayList<>();
     }
 
-    public void cargando (){
+    public void cargando() {
         ingresos.add(numero);
-        numero=0.0;
+        numero = 0.0;
     }
-    
-    public void generarcalculos(){
+
+    public void generarcalculos() {
         generarmenor();
         generarmayor();
-        
+
     }
-    public void generarmenor(){
-        if(!ingresos.isEmpty()){
-            menor=ingresos.get(0);
-            for(double num:ingresos){
-                if(num < menor){
-                    menor=num;
+
+    public void generarmenor() {
+        if (!ingresos.isEmpty()) {
+            menor = ingresos.get(0);
+            for (double num : ingresos) {
+                if (num < menor) {
+                    menor = num;
                 }
             }
         }
     }
-    public void generarmayor(){
-        mayor=ingresos.get(0);
-            for(double num:ingresos){
-                if(num > mayor){
-                    mayor=num;
-                }
+
+    public void generarmayor() {
+        mayor = ingresos.get(0);
+        for (double num : ingresos) {
+            if (num > mayor) {
+                mayor = num;
             }
+        }
     }
 
     public double getMayor() {
@@ -62,11 +66,11 @@ public class RegistroNumerosFormBean {
     public void setMayor(double mayor) {
         this.mayor = mayor;
     }
-    
+
     public double getMenor() {
         return menor;
     }
-    
+
     public List<Double> getIngresos() {
         return ingresos;
     }
@@ -103,6 +107,5 @@ public class RegistroNumerosFormBean {
     public void setPromedio(double promedio) {
         this.promedio = promedio;
     }
-    
-}
 
+}

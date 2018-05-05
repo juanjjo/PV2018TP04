@@ -17,21 +17,22 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class OpcionTemperaturaFormBean {
-private String eleccion;
+
+    private String eleccion;
     private double ingreso;
     private double equivalencia;
+
     public OpcionTemperaturaFormBean() {
     }
 
-    public void tranformar (){
-        if(eleccion.equals("FAR")){
-            equivalencia= 1.8*ingreso;
-        }else{
-            if(eleccion.equals("CEL")){
-                equivalencia= (ingreso-32)/1.8;
-            }
+    public void tranformar() {
+        if (eleccion.equals("FAR")) {
+            equivalencia = 1.8 * ingreso;
+        } else if (eleccion.equals("CEL")) {
+            equivalencia = (ingreso - 32) / 1.8;
         }
     }
+
     public String getEleccion() {
         return eleccion;
     }
@@ -70,5 +71,5 @@ private String eleccion;
     public void setEquivalencia(double equivalencia) {
         this.equivalencia = equivalencia;
     }
-    
+
 }

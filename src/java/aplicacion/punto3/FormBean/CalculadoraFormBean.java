@@ -15,36 +15,40 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class CalculadoraFormBean {
-private double numero1;
-  private double numero2;
-  private String eleccion;
-  private double resultado;
+
+    private double numero1;
+    private double numero2;
+    private String eleccion;
+    private double resultado;
+
     public CalculadoraFormBean() {
-      
+
     }
-public void calcular (){
-        switch (eleccion){
-            case "sumar":{
-                resultado=numero1+numero2;
+
+    public void calcular() {
+        switch (eleccion) {
+            case "sumar": {
+                resultado = numero1 + numero2;
                 break;
             }
-            case "restar":{
-                resultado=numero1-numero2;
+            case "restar": {
+                resultado = numero1 - numero2;
                 break;
             }
-            case "multiplicar":{
-                resultado=numero1*numero2;
+            case "multiplicar": {
+                resultado = numero1 * numero2;
                 break;
             }
-            case "dividir":{
-                resultado=numero1/numero2;
+            case "dividir": {
+                resultado = numero1 / numero2;
                 break;
             }
-            case "potencia":{
-                resultado=Math.pow(numero1,numero2);
+            case "potencia": {
+                resultado = Math.pow(numero1, numero2);
             }
         }
-    } 
+    }
+
     /**
      * @return the numero1
      */
@@ -100,7 +104,5 @@ public void calcular (){
     public void setResultado(double resultado) {
         this.resultado = resultado;
     }
-    
 
 }
-
