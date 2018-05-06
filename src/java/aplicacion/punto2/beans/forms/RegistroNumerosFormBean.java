@@ -36,7 +36,7 @@ public class RegistroNumerosFormBean {
     public void generarcalculos() {
         generarmenor();
         generarmayor();
-
+        generarpromedio();
     }
 
     public void generarmenor() {
@@ -58,7 +58,15 @@ public class RegistroNumerosFormBean {
             }
         }
     }
-
+    public void generarpromedio(){
+        promedio=0.0;
+        double suma=0.0;
+        for(double num:ingresos){
+        suma=suma+num;
+       }
+        promedio=suma/ingresos.size();
+    }
+    
     public double getMayor() {
         return mayor;
     }
