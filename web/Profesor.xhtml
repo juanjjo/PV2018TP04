@@ -2,20 +2,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Tp4-punto5</title>
     </h:head>
     <h:body>
         <p:panel id="pnlProfesores" header="Registro Profesor">
             <h:form id="frmProfesor">
-                <h:panelGrid id="pnlRegistracionProfesor" columns="2">
-                    
-                </h:panelGrid>
-                
-            </h:form> 
-            
-        </p:panel>
+                <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+                <h:panelGrid id="pnlRegistracionProfesor" columns="3">
+                    <p:outputLabel value="Matricula" for="txtMatricula"/>
+                    <p:inputText id="txtMatricula" required="true" value="#{profesorFormBean.profesor.matricula}"/>
+                    <p:message for="txtMatricula" display="icon"/>
+
+                    <p:outputLabel value="Nombre" for="txtNombre"/>
+                    <p:inputText id="txtNombre" required="true" value="#{profesorFormBean.profesor.nombre}"/>
+                    <p:message for="txtNombre" display="icon"/>
+
+                    <p:outputLabel value="Apellido" for="txtApellido"/>
+                    <p:inputText id="txtApellido" required="true" value="#{profesorFormBean.profesor.apellido}"/>
+                    <p:message for="txtApellido" display="icon"/>
+
+                    <p:outputLabel value="Sexo" />
+                    <p:selectOneMenu value="#{profesorFormBean.profesor.sexo}" style="width:200px" >
+                        <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+                        <f:selectItem itemValue="Femenino" itemLabel="Femenino"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel/>
+
+                    <p:outputLabel value="Asignatura" for="txtAsignatura"/>
+                    <p:inputText id="txtAsignatura" required="true" value="#{profesorFormBean.profesor.asignatura}"/>
+                    <p:message for="txtAsignatura" display="icon"/>
+
+                    <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                     oncomplete="PF('mostrarDialogo').show();"
+                                     actionListener="#{profesorFormBean.agregarProfesores()}"
+                                     update=":frmProfe" />
+                </h:panelGrid>                
+            </h:form>             
+        </p:panel >
+
+        <p:dialog id="dlgMostrar" widgetVar="mostrarDialogo">           
+            <h:form id="frmProfe" >
+                <p:dataTable  value="#{profesorFormBean.profesores}"
+                              var="pr">
+                    <f:facet name="header">
+                        Registracion de Profesores
+                    </f:facet>
+                    <p:column headerText="Matricula">
+                        <p:outputLabel value="#{pr.matricula}"/>
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <p:outputLabel value="#{pr.nombre}"/>
+                    </p:column>
+                    <p:column headerText="Apellido">
+                        <p:outputLabel value="#{pr.apellido}"/>
+                    </p:column>
+                    <p:column headerText="Sexo">
+                        <p:outputLabel value="#{pr.sexo}"/>
+                    </p:column>
+                    <p:column headerText="Asignatura">
+                        <p:outputLabel value="#{pr.asignatura}"/>
+                    </p:column>
+                    <p:column headerText="Mostrar">
+                        <p:commandButton value="Mostrar"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
     </h:body>
 </html>
 
