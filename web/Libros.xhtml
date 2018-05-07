@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TP4-punto 7y8</title>
+    </h:head>
+    <h:body>
+        <p:panel>
+            <h:form id="frmBusqueda" >
+                <h:panelGrid id="pnlBuscarLibro" columns="3">
+                    <p:outputLabel id="lblBuscarAutor" value="Buscar Autor:"/>
+                    <p:inputText id="txtBuscarAutor" value="#{libroFormBean.autorBuscado}" 
+                                 placeholder="Ingrese Apellido/s y Nombre/s" style="width: 300px"/>
+                    <p:commandButton id="btnBuscar" value="Buscar" icon="ui-icon-search" 
+                                     actionListener="#{libroFormBean.buscarLibros()}" update=":frmLibrosEncontrados"/>
+                </h:panelGrid>                
+            </h:form>
+            <h:form id="frmLibrosEncontrados">
+                <p:dataTable id="tblLibrosEncontrados" value="#{libroFormBean.busquedaLibros}"
+                             var="busq"   emptyMessage="No se encontraron Libros..." >
+                    <p:column headerText="ISBN">
+                        <p:outputLabel value="#{busq.ISBM}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <p:outputLabel value="#{busq.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <p:outputLabel value="#{busq.autor}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <p:outputLabel value="#{busq.precio}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+        <p:panel id="pnlLibro" header="Registrar Libros">
+            <h:form id="frmRegistrarLibro">
+                <h:panelGrid columns="2" >
+                    <p:outputLabel value="ISBM" for="txtISBM" rendered="true" />
+                    <p:inputText id="txtISBM" required="true" placeholder="Ingrese ISBM" value="#{libroFormBean.libro.ISBM}">
+                        <f:validateLength minimum="3" maximum="6"/>                       
+                    </p:inputText>
+                    <p:outputLabel value="Titulo" for="txtTitulo"/>
+                    <p:inputText id="txtTitulo" placeholder="Ingrese Titulo" required="true" value="#{libroFormBean.libro.titulo}"/>
+
+                    <p:outputLabel value="Autor" /> 
+                    <p:selectOneMenu id="lstAutores" value="#{libroFormBean.libro.autor}" style="width:200px">
+                        <f:selectItems value="#{libroFormBean.listaAutores()}"/>
+                    </p:selectOneMenu>                    
+
+                    <p:outputLabel value="Precio ($)" for="txtPrecio"/>
+                    <p:inputText id="txtPrecio" required="true" 
+                                 value="#{libroFormBean.libro.precio}"  
+                                 label="currency" >
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </p:inputText>
+                    <p:message display="tooltip" for="txtPrecio"/>
+                    <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                     actionListener="#{libroFormBean.agregarLibro()}"
+                                     update=":frmLibros"/><!--onclick="PF('dlg1').show();"--> 
+                </h:panelGrid>              
+            </h:form>          
+
+        </p:panel>
+        <p:panel  >
+            <h:form id="frmLibros" >
+                <p:dataTable value="#{libroFormBean.libros}"
+                             var="lib" emptyMessage="No hay libros en la Lista">
+                    <f:facet name="header">
+                        Registracion de Libros
+                    </f:facet>
+                    <p:column headerText="ISBN">
+                        <p:outputLabel value="#{lib.ISBM}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <p:outputLabel value="#{lib.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <p:outputLabel value="#{lib.autor}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <p:outputLabel value="#{lib.precio}">
+                            <f:convertNumber  type="currency" currencySymbol="$" />
+                        </p:outputLabel>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+
