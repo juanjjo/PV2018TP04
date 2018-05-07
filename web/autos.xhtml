@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   <h:head>
+        <title>aplicacion-ahoracado</title>
+    </h:head>
+    <h:body>
+       
+        <p:panel id="pnlautos" header="------------------------------------------------------------------ELIJA EL AUTO QUE LE GUSTE---------------------------------------------------------------------"> 
+           
+            <h:form id="frmauto1">
+                <p:commandButton value="Listar Autos"  actionListener="#{autosRegistradosFormBeans.cargarauto1()}"
+                             update="tbcar"/>
+            <p:dataTable id="tbcar" value="#{autosRegistradosFormBeans.auto1}" var="car">
+                <p:column headerText="Numero">
+                    <p:outputLabel value="#{car.numero}"/>
+                </p:column>
+                <p:column headerText="Patente">
+                    <p:outputLabel value="#{car.patente}"/>
+                </p:column>
+                <p:column headerText="Marca">
+                    <p:outputLabel value="#{car.marca}"/>
+                </p:column>
+                <p:column headerText="Modelo">
+                    <p:outputLabel value="#{car.modelo}"/>
+                </p:column>
+                <p:column headerText="Color">
+                    <p:outputLabel value="#{car.color}"/>
+                </p:column>
+            </p:dataTable>
+               <!--- eleccion de auto -->  
+               
+            <p:outputLabel id="lbleleccion" value="Ingrese N de Eleccion"/>   
+            <p:inputText id="txteleccion" value="#{autosRegistradosFormBeans.eleccion}"/>
+            
+               <h:form id="form2">
+                 <p:commandButton value="ENVIAR"  actionListener="#{autosRegistradosFormBeans.cargar()}"
+                                  update="tbauto2"/>
+                 <p:growl id="msg"/>
+                 <p:dataTable id="tbauto2" value="#{autosRegistradosFormBeans.auto2}" editable="true" var="car2">
+                     <p:ajax event="rowEdit" listener="#{autosRegistradosFormBeans.actualizar}" update="tbauto2"/>
+                     <p:ajax event="rowEditCancel" listener="#{autosRegistradosFormBeans.cancelar}" update="tbauto2"/>
+                      
+                        <p:column headerText="numero">
+                            <p:outputLabel value="#{car2.numero}"/>
+                        </p:column>
+                        <p:column headerText="Patente">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{car2.patente}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{autosRegistradosFormBeans.modipatente}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Marca">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{car2.marca}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{autosRegistradosFormBeans.modimarca}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Modelo">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{car2.modelo}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{autosRegistradosFormBeans.modimodelo}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        <p:column headerText="Color">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:outputLabel value="#{car2.color}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{autosRegistradosFormBeans.modicolor}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                     <p:column headerText="Modificador de Atributos">
+                         <p:rowEditor/>
+                     </p:column>
+                     </p:dataTable>
+             </h:form>
+            
+            <!-- modificacion de atributos -->
+           
+            <!-- mostrar auto modificado-->
+            
+             </h:form>
+
+        </p:panel>
+       
+    </h:body>
+</html>
+
