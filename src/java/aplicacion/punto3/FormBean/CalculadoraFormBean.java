@@ -24,7 +24,6 @@ public class CalculadoraFormBean {
     public CalculadoraFormBean() {
 
     }
-
     public void calcular() {
         switch (eleccion) {
             case "sumar": {
